@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Content Riser | High-Ticket Conversion Systems</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --gold-bright: #f9d976;
+            --obsidian: #050505;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--obsidian);
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Enhanced Noise + Grid Texture Overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(212, 175, 55, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.02) 1px, transparent 1px),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-size: 40px 40px, 40px 40px, auto;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        /* Luxury Gradients */
+        .gold-gradient {
+            background: linear-gradient(135deg, #d4af37 0%, #f9d976 50%, #b8860b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-bg {
+            background: linear-gradient(135deg, #d4af37 0%, #f9d976 100%);
+        }
+
+        .gold-border {
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        /* Glassmorphism */
+        .luxury-card {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .luxury-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.15);
+        }
+
+        /* Scroll Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scroll Progress Bar */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(to right, #d4af37, #f9d976);
+            z-index: 150;
+            width: 0%;
+        }
+
+        /* Animated Blobs */
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: -1;
+            animation: move 20s infinite alternate;
+        }
+
+        @keyframes move {
+            from { transform: translate(-10%, -10%); }
+            to { transform: translate(20%, 20%); }
+        }
+
+        .loading-shimmer {
+            background: linear-gradient(90deg, #111 25%, #222 50%, #111 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .btn-luxury {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-luxury::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-luxury:hover::after {
+            left: 100%;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .faq-question:hover {
+            color: var(--gold);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="scroll-progress"></div>
+    <div class="blob" style="top: 10%; left: -5%;"></div>
+    <div class="blob" style="bottom: 20%; right: -5%; animation-delay: -5s;"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-[140] transition-all duration-300 border-b border-white/5" id="navbar">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center space-x-3 group cursor-pointer">
+                    <div class="w-10 h-10 gold-bg rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.3)] group-hover:scale-110 transition-transform">
+                        <i data-lucide="trending-up" class="text-black w-6 h-6"></i>
+                    </div>
+                    <span class="text-xl font-bold tracking-[0.1em] uppercase">The Content <span class="text-amber-500">Riser</span></span>
+                </div>
+                
+                <div class="hidden md:flex space-x-10 text-[13px] font-medium tracking-widest uppercase items-center">
+                    <a href="#services" class="hover:text-amber-500 transition-colors">Services</a>
+                    <a href="#ai-lab" class="text-amber-400 font-bold flex items-center gap-1"><span class="animate-pulse">✨</span> AI Lab</a>
+                    <a href="https://drive.google.com/drive/folders/1VP20KtBNkM5UdPQ5ZIGggKO5I7vGnQuM?usp=drive_link" target="_blank" class="hover:text-amber-500 transition-colors">Samples</a>
+                    <a href="#about" class="hover:text-amber-500 transition-colors">About</a>
+                    <a href="#faq" class="hover:text-amber-500 transition-colors">FAQ</a>
+                    <a href="https://app.lemcal.com/@anjumshajith" target="_blank" class="gold-bg text-black px-6 py-2.5 rounded-full font-bold hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all">Let's Talk</a>
+                </div>
+
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="p-2 text-amber-500">
+                        <i data-lucide="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-xl px-6 py-10 space-y-6 border-b border-white/10">
+            <a href="#services" class="block text-xl">Services</a>
+            <a href="#ai-lab" class="block text-xl text-amber-400">✨ AI Lab</a>
+            <a href="https://drive.google.com/drive/folders/1VP20KtBNkM5UdPQ5ZIGggKO5I7vGnQuM?usp=drive_link" target="_blank" class="block text-xl">Samples</a>
+            <a href="#about" class="block text-xl">About</a>
+            <a href="#faq" class="block text-xl text-white">FAQ</a>
+            <a href="https://app.lemcal.com/@anjumshajith" target="_blank" class="block text-xl text-amber-500 font-bold">Book Call</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-40 pb-32 lg:pt-56 lg:pb-48">
+        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+            <div class="reveal">
+                <span class="inline-flex items-center gap-2 px-4 py-1 mb-8 text-[11px] font-bold tracking-[0.2em] text-amber-500 uppercase border border-amber-500/30 rounded-full bg-amber-500/5">
+                    The Authority Builder 👑
+                </span>
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-10 leading-[1.1]">
+                    Convert Attention Into <br>
+                    <span class="gold-gradient">Premium Revenue </span>
+                </h1>
+                <p class="text-xl text-slate-400 mb-12 leading-relaxed max-w-3xl mx-auto font-light">
+                    We don't just "do marketing." We architect high-converting funnels and persuasive content systems that turn cold traffic into high-ticket clients. 🚀
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                    <a href="https://app.lemcal.com/@anjumshajith" target="_blank" class="btn-luxury w-full sm:w-auto px-10 py-5 gold-bg text-black rounded-full font-bold text-lg shadow-[0_10px_30px_rgba(212,175,55,0.2)] hover:scale-105 transition-all">
+                        Start Your Growth Journey 📈
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1VP20KtBNkM5UdPQ5ZIGggKO5I7vGnQuM?usp=drive_link" target="_blank" class="w-full sm:w-auto px-10 py-5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full font-bold text-lg backdrop-blur-md transition-all">
+                        View Portfolio 📁
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="reveal mb-20 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Our <span class="text-amber-500">Core</span> Stack 💎</h2>
+                <p class="text-slate-500 text-lg">Engineered for the modern coach & consultant.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="reveal luxury-card p-10 rounded-[2rem]">
+                    <div class="w-14 h-14 mb-8 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 border border-amber-500/20">
+                        <i data-lucide="mail"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Email Mastery 📧</h3>
+                    <p class="text-slate-400 leading-relaxed font-light">Automated sequences that don't just "touch base"—they build psychological bridges to a buying decision.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="reveal luxury-card p-10 rounded-[2rem]" style="transition-delay: 0.1s;">
+                    <div class="w-14 h-14 mb-8 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 border border-amber-500/20">
+                        <i data-lucide="layers"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">High-Intent Funnels 🏗️</h3>
+                    <p class="text-slate-400 leading-relaxed font-light">Custom landing pages designed using conversion heuristics and behavioral economics principles.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="reveal luxury-card p-10 rounded-[2rem]" style="transition-delay: 0.2s;">
+                    <div class="w-14 h-14 mb-8 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 border border-amber-500/20">
+                        <i data-lucide="mouse-pointer-click"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Elite Ad Copy ✍️</h3>
+                    <p class="text-slate-400 leading-relaxed font-light">Ads that stop the scroll by targeting specific pain points and offering immediate intellectual value.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="reveal luxury-card p-10 rounded-[2rem]" style="transition-delay: 0.3s;">
+                    <div class="w-14 h-14 mb-8 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 border border-amber-500/20">
+                        <i data-lucide="clipboard-check"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Conversion Audits 🔍</h3>
+                    <p class="text-slate-400 leading-relaxed font-light">A deep-dive analysis of your current assets to identify leakage and unlock hidden revenue immediately.</p>
+                </div>
+                <!-- Card 5 -->
+                <div class="reveal luxury-card p-10 rounded-[2rem]" style="transition-delay: 0.4s;">
+                    <div class="w-14 h-14 mb-8 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 border border-amber-500/20">
+                        <i data-lucide="cpu"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">CRM Automation ⚙️</h3>
+                    <p class="text-slate-400 leading-relaxed font-light">Building the backend architecture that handles leads, follow-ups, and bookings while you sleep.</p>
+                </div>
+                <!-- Card 6 -->
+                <div class="reveal luxury-card p-10 rounded-[2rem]" style="transition-delay: 0.5s;">
+                    <div class="w-14 h-14 mb-8 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 border border-amber-500/20">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Authority Positioning 🏅</h3>
+                    <p class="text-slate-400 leading-relaxed font-light">Crafting the digital presence that makes you the undisputed go-to expert in your specific niche.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Conversion Lab Section -->
+    <section id="ai-lab" class="py-32 bg-[#0a0a0a] border-y border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="reveal text-center mb-20">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6">✨ AI <span class="gold-gradient">Conversion</span> Lab 🧪</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto font-light">Instant access to our strategic frameworks. Powered by Gemini 2.5 Flash. 🧠</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Tool 1 -->
+                <div class="reveal luxury-card p-10 rounded-[2.5rem] border-amber-500/20">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-500"><i data-lucide="zap" class="w-5 h-5"></i></div>
+                        <h3 class="text-xl font-bold">Headline Optimizer ⚡</h3>
+                    </div>
+                    <textarea id="ai-headline-input" placeholder="Enter your current headline..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 mb-6 text-sm focus:outline-none focus:border-amber-500 h-32 resize-none transition-all"></textarea>
+                    <button onclick="optimizeHeadline()" id="headline-btn" class="w-full py-4 gold-bg text-black rounded-2xl font-bold text-sm btn-luxury">
+                        Optimize Now ✨
+                    </button>
+                    <div id="headline-result" class="mt-8 text-sm text-slate-300 leading-relaxed space-y-4 hidden animate-fade-in bg-white/5 p-4 rounded-xl border border-white/5"></div>
+                    <div id="headline-loader" class="mt-8 space-y-4 hidden">
+                        <div class="h-4 loading-shimmer rounded w-full"></div>
+                        <div class="h-4 loading-shimmer rounded w-5/6"></div>
+                    </div>
+                </div>
+
+                <!-- Tool 2 -->
+                <div class="reveal luxury-card p-10 rounded-[2.5rem]">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-500"><i data-lucide="lightbulb" class="w-5 h-5"></i></div>
+                        <h3 class="text-xl font-bold">Magnet Architect 💡</h3>
+                    </div>
+                    <input id="ai-niche-input" type="text" placeholder="Your Niche (e.g. Wellness for Moms)" class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 mb-6 text-sm focus:outline-none focus:border-amber-500 transition-all">
+                    <button onclick="generateMagnet()" id="magnet-btn" class="w-full py-4 bg-white/10 rounded-2xl font-bold text-sm hover:bg-white/20 transition-all border border-white/10">
+                        Generate Ideas ⚡
+                    </button>
+                    <div id="magnet-result" class="mt-8 text-sm text-slate-300 leading-relaxed hidden animate-fade-in bg-white/5 p-4 rounded-xl border border-white/5"></div>
+                    <div id="magnet-loader" class="mt-8 space-y-4 hidden">
+                        <div class="h-4 loading-shimmer rounded w-full"></div>
+                        <div class="h-4 loading-shimmer rounded w-5/6"></div>
+                    </div>
+                </div>
+
+                <!-- Tool 3 -->
+                <div class="reveal luxury-card p-10 rounded-[2.5rem] border-white/10">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-500"><i data-lucide="eye" class="w-5 h-5"></i></div>
+                        <h3 class="text-xl font-bold">Conversion Audit 🕵️‍♂️</h3>
+                    </div>
+                    <textarea id="ai-copy-input" placeholder="Paste your pitch or bio..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 mb-6 text-sm focus:outline-none focus:border-amber-500 h-32 resize-none transition-all"></textarea>
+                    <button onclick="auditCopy()" id="audit-btn" class="w-full py-4 bg-zinc-800 rounded-2xl font-bold text-sm hover:bg-zinc-700 transition-all">
+                        Analyze Copy 📊
+                    </button>
+                    <div id="audit-result" class="mt-8 text-sm text-slate-300 leading-relaxed hidden animate-fade-in bg-white/5 p-4 rounded-xl border border-white/5"></div>
+                    <div id="audit-loader" class="mt-8 space-y-4 hidden">
+                        <div class="h-4 loading-shimmer rounded w-full"></div>
+                        <div class="h-4 loading-shimmer rounded w-5/6"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center reveal">
+                <p class="text-slate-400 text-sm max-w-xl mx-auto">These tools give you a glimpse of the strategy we bring to every project. For a full custom system, <a href="https://app.lemcal.com/@anjumshajith" target="_blank" class="text-amber-500 underline font-bold">book a discovery call 📅</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div class="reveal">
+                <div class="relative group">
+                    <div class="absolute -inset-1 gold-bg opacity-20 blur-2xl group-hover:opacity-40 transition-opacity"></div>
+                    <div class="relative luxury-card p-12 rounded-[3rem] border border-amber-500/10">
+                        <h3 class="text-3xl font-bold mb-2 text-white">Anjum Shajith 🤝</h3>
+                        <p class="text-amber-500 font-bold tracking-widest text-sm uppercase mb-8">Architect of Growth 📐</p>
+                        <p class="text-slate-300 text-xl leading-relaxed font-light italic">
+                            "Most businesses are just one system away from their next level. We build that system." 🏗️
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal" style="transition-delay: 0.2s;">
+                <h2 class="text-4xl md:text-6xl font-bold mb-10">We Value <span class="text-amber-500">Reality</span> Over Reports 🎯</h2>
+                <p class="text-slate-400 text-xl mb-8 leading-relaxed font-light">
+                    The Content Riser was born from a simple realization: Most coaches have enough attention, but they don't have enough structure. 🧱
+                </p>
+                <div class="grid grid-cols-2 gap-10">
+                    <div class="space-y-2">
+                        <div class="text-4xl font-bold gold-gradient">100%</div>
+                        <p class="text-slate-500 uppercase text-xs tracking-tighter">Skin In The Game 🎲</p>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="text-4xl font-bold gold-gradient">0%</div>
+                        <p class="text-slate-500 uppercase text-xs tracking-tighter">Vanity Metrics 📉</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-32 relative">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="reveal text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Common <span class="text-amber-500">Questions</span> 💬</h2>
+                <p class="text-slate-400">Everything you need to know before we scale together.</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="reveal faq-item luxury-card rounded-2xl overflow-hidden">
+                    <button class="faq-question w-full p-6 text-left flex justify-between items-center transition-colors font-semibold" onclick="toggleFaq(0)">
+                        <span>How quickly will I see results? ⏱️</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 transition-transform" id="faq-icon-0"></i>
+                    </button>
+                    <div class="hidden p-6 pt-0 text-slate-400 leading-relaxed border-t border-white/5" id="faq-answer-0">
+                        While high-level positioning takes time to fully permeate your market, we typically implement conversion funnels and initial email sequences within 14-21 days. Most clients see a tangible shift in lead quality within the first 30 days.
+                    </div>
+                </div>
+
+                <div class="reveal faq-item luxury-card rounded-2xl overflow-hidden" style="transition-delay: 0.1s;">
+                    <button class="faq-question w-full p-6 text-left flex justify-between items-center transition-colors font-semibold" onclick="toggleFaq(1)">
+                        <span>What niches do you specialize in? 🎯</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 transition-transform" id="faq-icon-1"></i>
+                    </button>
+                    <div class="hidden p-6 pt-0 text-slate-400 leading-relaxed border-t border-white/5" id="faq-answer-1">
+                        We focus exclusively on high-ticket coaches, consultants, and service-based business owners. If your product or service requires a high degree of trust and authority to sell, our conversion systems are designed specifically for you.
+                    </div>
+                </div>
+
+                <div class="reveal faq-item luxury-card rounded-2xl overflow-hidden" style="transition-delay: 0.2s;">
+                    <button class="faq-question w-full p-6 text-left flex justify-between items-center transition-colors font-semibold" onclick="toggleFaq(2)">
+                        <span>What makes you different from a typical agency? 🦄</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 transition-transform" id="faq-icon-2"></i>
+                    </button>
+                    <div class="hidden p-6 pt-0 text-slate-400 leading-relaxed border-t border-white/5" id="faq-answer-2">
+                        Typical agencies focus on "management." We focus on "architecture." We don't just run ads; we build the entire psychological infrastructure that turns a click into a customer. We prioritize revenue over vanity metrics like impressions or followers.
+                    </div>
+                </div>
+
+                <div class="reveal faq-item luxury-card rounded-2xl overflow-hidden" style="transition-delay: 0.3s;">
+                    <button class="faq-question w-full p-6 text-left flex justify-between items-center transition-colors font-semibold" onclick="toggleFaq(3)">
+                        <span>Do I need a large team to run these systems? 👥</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 transition-transform" id="faq-icon-3"></i>
+                    </button>
+                    <div class="hidden p-6 pt-0 text-slate-400 leading-relaxed border-t border-white/5" id="faq-answer-3">
+                        No. Our goal is to simplify your business, not complicate it. We leverage CRM automation and high-converting copy to do the heavy lifting, allowing you (or a small team) to focus purely on high-leverage coaching and delivery.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Large CTA Section -->
+    <section class="py-20">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="gold-bg rounded-[3rem] p-12 lg:p-20 text-center text-black relative overflow-hidden group">
+                <h2 class="text-4xl md:text-6xl font-black mb-8 relative z-10">Ready to fix your <br>conversion leak? 💸</h2>
+                <p class="text-xl font-medium opacity-80 mb-12 max-w-2xl mx-auto relative z-10">
+                    Let’s build a system that converts your audience into loyal, paying clients while you focus on your coaching. 🚀
+                </p>
+                <a href="https://app.lemcal.com/@anjumshajith" target="_blank" class="inline-block bg-black text-white px-12 py-5 rounded-full font-black text-xl tracking-widest uppercase hover:scale-105 transition-all shadow-2xl relative z-10">
+                    Let’s Build Your System 🔥
+                </a>
+                <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Social Section -->
+    <section id="contact" class="py-32 bg-[#050505]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="reveal luxury-card p-12 lg:p-20 rounded-[4rem] border-amber-500/10 overflow-hidden relative">
+                <div class="absolute top-0 right-0 w-64 h-64 gold-bg opacity-5 blur-[100px]"></div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 relative z-10">
+                    <div>
+                        <h2 class="text-5xl font-bold mb-8">Initiate <br><span class="gold-gradient">Expansion</span> 🛰️</h2>
+                        <p class="text-slate-400 text-lg mb-12 font-light">Have questions before booking? Use the form or contact Anjum directly through social channels. 📲</p>
+                        
+                        <div class="space-y-8">
+                            <a href="mailto:thecontentriser.co@gmail.com" class="flex items-center gap-6 group">
+                                <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center group-hover:bg-amber-500 group-hover:text-black transition-all">
+                                    <i data-lucide="mail"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-slate-500 uppercase tracking-widest">Email 📩</p>
+                                    <p class="text-xl font-bold">thecontentriser.co@gmail.com</p>
+                                </div>
+                            </a>
+                            <div class="flex gap-6">
+                                <a href="https://www.linkedin.com/in/anjum-shajith-9b4041324" target="_blank" class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center hover:text-amber-500 transition-colors"><i data-lucide="linkedin"></i></a>
+                                <a href="https://x.com/Anjumshaah_" target="_blank" class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center hover:text-amber-500 transition-colors"><i data-lucide="twitter"></i></a>
+                                <a href="https://www.instagram.com/realanjum._?igsh=Zm5jNGk1MDRucWVq" target="_blank" class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center hover:text-amber-500 transition-colors"><i data-lucide="instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <input type="text" placeholder="Full Name" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-amber-500 transition-all">
+                            <input type="email" placeholder="Email Address" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-amber-500 transition-all">
+                        </div>
+                        <textarea rows="5" placeholder="Tell us about your current challenges..." required class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-amber-500 transition-all resize-none"></textarea>
+                        <button type="submit" class="w-full py-5 gold-bg text-black rounded-2xl font-black text-lg tracking-widest uppercase btn-luxury shadow-lg shadow-amber-500/10">
+                            Submit Inquiry 📬
+                        </button>
+                    </form>
+                    <div id="form-success" class="hidden mt-6 p-10 bg-amber-500/10 border border-amber-500/20 rounded-3xl text-center">
+                        <i data-lucide="check-circle" class="w-16 h-16 text-amber-500 mx-auto mb-6"></i>
+                        <h3 class="text-2xl font-bold mb-2">Message Transmitted ✨</h3>
+                        <p class="text-slate-400">Anjum will reach out within 24 hours.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 border-t border-white/5 text-center">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-center space-x-3 mb-10">
+                <div class="w-8 h-8 gold-bg rounded flex items-center justify-center">
+                    <i data-lucide="trending-up" class="text-black w-4 h-4"></i>
+                </div>
+                <span class="text-sm font-bold tracking-[0.3em] uppercase">The Content Riser 🏛️</span>
+            </div>
+            <p class="text-slate-600 text-[10px] tracking-[0.4em] uppercase mb-4">&copy; 2026 Crafted for Extraordinary Results ✨</p>
+            <div class="flex justify-center space-x-10 text-[10px] tracking-widest uppercase text-slate-500">
+                <a href="#" class="hover:text-amber-500">Privacy</a>
+                <a href="#" class="hover:text-amber-500">Systems</a>
+                <a href="#" class="hover:text-amber-500">Legal</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // API Config
+        const apiKey = "";
+        const GEMINI_MODEL = "gemini-2.5-flash-preview-09-2025";
+
+        // Initialize Lucide
+        lucide.createIcons();
+
+        // Scroll Progress & Navbar Effect
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-progress").style.width = scrolled + "%";
+
+            const nav = document.getElementById('navbar');
+            if (winScroll > 50) {
+                nav.classList.add('bg-black/80', 'backdrop-blur-xl', 'py-2');
+            } else {
+                nav.classList.remove('bg-black/80', 'backdrop-blur-xl', 'py-2');
+            }
+        });
+
+        // Scroll Reveal Implementation
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // FAQ Toggle Logic
+        function toggleFaq(index) {
+            const answer = document.getElementById(`faq-answer-${index}`);
+            const icon = document.getElementById(`faq-icon-${index}`);
+            
+            const isHidden = answer.classList.contains('hidden');
+            
+            // Close all others
+            for(let i=0; i<4; i++) {
+                document.getElementById(`faq-answer-${i}`).classList.add('hidden');
+                document.getElementById(`faq-icon-${i}`).style.transform = 'rotate(0deg)';
+            }
+            
+            if (isHidden) {
+                answer.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Mobile Menu
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+        // Form Logic
+        const form = document.getElementById('contact-form');
+        const successMsg = document.getElementById('form-success');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            form.style.display = 'none';
+            successMsg.classList.remove('hidden');
+        });
+
+        // Gemini API Utility
+        async function callGemini(prompt, systemPrompt = "") {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            let delay = 1000;
+            for (let i = 0; i < 5; i++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (response.ok) {
+                        const data = await response.json();
+                        return data.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated.";
+                    }
+                } catch (err) {}
+                await new Promise(res => setTimeout(res, delay));
+                delay *= 2;
+            }
+            throw new Error("AI services busy. Please retry.");
+        }
+
+        async function optimizeHeadline() {
+            const input = document.getElementById('ai-headline-input').value;
+            if (!input) return;
+            toggleAI('headline', true);
+            try {
+                const res = await callGemini(`Optimize this coach headline: ${input}`, "You are a master conversion copywriter. Provide 3 punchy variations using psychology.");
+                document.getElementById('headline-result').innerHTML = res.replace(/\n/g, '<br>');
+                document.getElementById('headline-result').classList.remove('hidden');
+            } catch (e) {
+                document.getElementById('headline-result').innerText = e.message;
+            } finally { toggleAI('headline', false); }
+        }
+
+        async function generateMagnet() {
+            const input = document.getElementById('ai-niche-input').value;
+            if (!input) return;
+            toggleAI('magnet', true);
+            try {
+                const res = await callGemini(`Lead magnet ideas for: ${input}`, "You are an authority-building expert. Suggest 3 elite lead magnets.");
+                document.getElementById('magnet-result').innerHTML = res.replace(/\n/g, '<br>');
+                document.getElementById('magnet-result').classList.remove('hidden');
+            } catch (e) {
+                document.getElementById('magnet-result').innerText = e.message;
+            } finally { toggleAI('magnet', false); }
+        }
+
+        async function auditCopy() {
+            const input = document.getElementById('ai-copy-input').value;
+            if (!input) return;
+            toggleAI('audit', true);
+            try {
+                const res = await callGemini(`Audit this pitch: ${input}`, "Analyze conversion score (0-10) and give 1 major fix.");
+                document.getElementById('audit-result').innerHTML = res.replace(/\n/g, '<br>');
+                document.getElementById('audit-result').classList.remove('hidden');
+            } catch (e) {
+                document.getElementById('audit-result').innerText = e.message;
+            } finally { toggleAI('audit', false); }
+        }
+
+        function toggleAI(id, loading) {
+            document.getElementById(`${id}-btn`).style.opacity = loading ? '0.5' : '1';
+            document.getElementById(`${id}-loader`).classList.toggle('hidden', !loading);
+            if(loading) document.getElementById(`${id}-result`).classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
